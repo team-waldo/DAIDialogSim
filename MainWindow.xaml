@@ -1,0 +1,70 @@
+﻿<mah:MetroWindow x:Class="DAIDialogSim.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns:local="clr-namespace:DAIDialogSim"
+        mc:Ignorable="d"
+        SaveWindowPosition="True" WindowStartupLocation="CenterScreen"
+        Title="DAI Dialogue Simulator" Height="550" Width="800" Background="#FF252525" WindowTitleBrush="#FF252525" Loaded="MetroWindow_Loaded">
+    <mah:MetroWindow.TitleTemplate>
+        <DataTemplate>
+            <TextBlock Text="{TemplateBinding Content}"
+                   TextTrimming="CharacterEllipsis"
+                   VerticalAlignment="Center"
+                   Margin="8 -1 8 0"/>
+        </DataTemplate>
+    </mah:MetroWindow.TitleTemplate>
+    <mah:MetroWindow.Resources>
+        <SolidColorBrush x:Key="BorderBrushGray" Color="#FF464646"/>
+        <ControlTemplate x:Key="TextBoxBaseControlTemplate1" TargetType="RichTextBox">
+            <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
+                <ScrollViewer x:Name="PART_ContentHost" Focusable="False" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Opacity" TargetName="border" Value="0.56"/>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+    </mah:MetroWindow.Resources>
+    <Grid Margin="1" ScrollViewer.HorizontalScrollBarVisibility="Auto">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="8*"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        <RichTextBox x:Name="RichTextBoxDialogue" Margin="2" Grid.RowSpan="12" IsReadOnly="True" IsDocumentEnabled="True" VerticalScrollBarVisibility="Visible" FontSize="16" BorderBrush="{DynamicResource BorderBrushGray}"
+                     Foreground="#FFD6D6D6" HorizontalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True" UseLayoutRounding="True" Template="{DynamicResource TextBoxBaseControlTemplate1}" Padding="2,5,2,8">
+            <RichTextBox.Resources>
+                <Style TargetType="RichTextBox"/>
+            </RichTextBox.Resources>
+        </RichTextBox>
+        <TextBox x:Name="TextBoxNode" Grid.Row="0" Grid.Column="1" Margin="2" Padding="5" MinWidth="100" BorderBrush="{DynamicResource BorderBrushGray}" mah:TextBoxHelper.ClearTextButton="True" mah:TextBoxHelper.Watermark="Node ID" MaxLength="8"/>
+        <Button x:Name="ButtonStart" Grid.Row="0" Grid.Column="2" Margin="2" Content=" 시작 " Click="ButtonStart_Click" FontWeight="Normal" BorderBrush="{DynamicResource BorderBrushGray}" FontSize="12"/>
+        <Button x:Name="ButtonFindPrevious" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Margin="2" Content="이전 대화문 찾기" Click="ButtonFindPrevious_Click" FontWeight="Normal" BorderBrush="{DynamicResource BorderBrushGray}" FontSize="12"/>
+        <TextBlock Grid.Row="2" Grid.Column="1" Margin="2" Padding="5" VerticalAlignment="Center" Foreground="White">
+            <Run Text="Weblate"/>
+            <Hyperlink NavigateUri="http://akintos.iptime.org/accounts/profile/#api" RequestNavigate="HandleRequestNavigate">
+                연동
+            </Hyperlink>
+        </TextBlock>
+        <Button x:Name="ButtonAuthSetting" Grid.Row="2" Grid.Column="2" Margin="2" Content="설정" FontWeight="Normal" BorderBrush="{DynamicResource BorderBrushGray}" FontSize="12" Click="ButtonAuthSetting_Click"/>
+        <Label x:Name="LabelAuth" Grid.Row="3" Grid.Column="1" Margin="2" Grid.ColumnSpan="2" Content="인증 결과" IsHitTestVisible="False"/>
+        <StackPanel Orientation="Vertical" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2">
+            <CheckBox x:Name="CheckBoxShowNumber" Margin="6" Content="Weblate 번호 표시" Click="OptionCheckBox_Checked" Visibility="Collapsed" />
+            <CheckBox x:Name="CheckBoxShowNode" Margin="6" Content="Node ID 표시" Click="OptionCheckBox_Checked" />
+            <CheckBox x:Name="CheckBoxEnableTranslation" Margin="6" Content="번역 활성화" Click="OptionCheckBox_Checked" />
+            <CheckBox x:Name="CheckBoxShowSource" Margin="6" Content="원문 병기" Click="OptionCheckBox_Checked" />
+            <CheckBox x:Name="CheckBoxShowCondition" Margin="6" Content="조건문 표시" Click="OptionCheckBox_Checked" Visibility="Collapsed" />
+        </StackPanel>
+    </Grid>
+</mah:MetroWindow>
