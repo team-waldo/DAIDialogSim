@@ -38,6 +38,7 @@ namespace DAIDialogSim
 
         public void SetAuthToken(string key)
         {
+            key = key.Trim();
             authToken = key;
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("text/javascript"));
