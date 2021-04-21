@@ -47,6 +47,13 @@ namespace DAIDialogSim
 
         public string TestAuth()
         {
+            var result = client.GetAsync($"{BASE_URL}/api/projects/{PROJECT_NAME}/").Result;
+
+            if (result.IsSuccessStatusCode)
+            {
+                return "인증 성공";
+            }
+
             if (string.IsNullOrWhiteSpace(authToken))
             {
                 return "API키가 없음";
@@ -56,14 +63,7 @@ namespace DAIDialogSim
             {
                 return "API키가 올바르지 않음";
             }
-
-            var result = client.GetAsync($"{BASE_URL}/api/projects/{PROJECT_NAME}/").Result;
-
-            if (result.IsSuccessStatusCode)
-            {
-                return "인증 성공";
-            }
-
+            
             return "인증 실패";
         }
 

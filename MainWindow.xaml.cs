@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Shell;
-
+using DAIDialogSim.Properties;
 using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
 
@@ -25,7 +25,7 @@ namespace DAIDialogSim
     public partial class MainWindow
     {
         private readonly DialogueSimulator sim;
-        private readonly SettingsManager settings;
+        private readonly Settings settings;
         private readonly WeblateClient client;
 
         public MainWindow()
@@ -36,13 +36,13 @@ namespace DAIDialogSim
             this.sim = DialogueSimulator.GetInstance();
             sim.TextBox = RichTextBoxDialogue;
 
-            this.settings = SettingsManager.GetInstance();
+            this.settings = Settings.Default;
             sim.Settings = settings;
 
             InitSettingsCheckBox();
 
             this.client = new WeblateClient();
-            client.SetAuthToken(this.settings.AuthToken);
+            client.SetAuthToken(settings.AuthToken);
             sim.Client = client;
 
             TestAuth();

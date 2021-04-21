@@ -30,7 +30,7 @@ namespace DAIDialogSim
         #endregion Singleton
 
 
-        public SettingsManager Settings { get; set; }
+        internal Properties.Settings Settings { get; set; }
 
         public WeblateClient Client { get; set; }
 

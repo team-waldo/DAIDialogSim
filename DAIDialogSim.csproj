@@ -102,7 +102,6 @@
     <Compile Include="Data\DialogueNode.cs" />
     <Compile Include="DialogueSimulator.cs" />
     <Compile Include="Settings.cs" />
-    <Compile Include="SettingsManager.cs" />
     <Compile Include="WeblateClient.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
